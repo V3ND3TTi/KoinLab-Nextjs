@@ -9,6 +9,8 @@ import {
   faBitcoin,
   faEthereum,
 } from '@fortawesome/free-brands-svg-icons';
+import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
+import { useTheme } from './ThemeContext';
 
 interface CoinPrices {
   bitcoin?: { usd: number };
@@ -17,6 +19,7 @@ interface CoinPrices {
 
 export default function Home() {
   const [prices, setPrices] = useState<CoinPrices>({});
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     fetch(
@@ -29,35 +32,42 @@ export default function Home() {
 
   return (
     <div className='flex flex-col min-h-screen'>
+      <button
+        onClick={toggleTheme}
+        className='absolute top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700'
+      >
+        <FontAwesomeIcon
+          icon={theme === 'light' ? faMoon : faSun}
+          className='w-6 h-6 text-gray-800 dark:text-gray-200'
+        />
+      </button>
       <main className='flex-grow flex flex-col items-center justify-center p-4'>
         <h1 className='text-4xl font-bold mb-6 text-blue-400'>
           Welcome to KoinLab
         </h1>
-        <p className='text-xl mb-6 text-center'>
-          Future home of the world's greatest cryptocurrency!!! For now this
-          site is a placeholder.
+        <p className='text-xl mb-4 text-center'>
+          Future home of the world's ultimate crypto-currency!!! For now it's
+          API practice. 😊
         </p>
-        <div className='text-5xl space-y-2'>
+        <div id='crypto-prices' className='text-5xl space-y-2'>
           <p>
-            <FontAwesomeIcon
-              icon={faBitcoin}
-              id='faBitcoin'
-              className='mr-2 text-5xl'
-            />
+            <FontAwesomeIcon id='faBitcoin' icon={faBitcoin} className='mr-2' />
             Bitcoin:{' '}
-            <span className='font-semibold text-5xl'>
+            <span>
               ${prices.bitcoin?.usd?.toLocaleString() || 'Loading...'}
             </span>
           </p>
           <p>
             <FontAwesomeIcon
-              icon={faEthereum}
               id='faEthereum'
-              className='mr-2 text-5xl'
+              icon={faEthereum}
+              className='mr-2'
             />
             Ethereum:{' '}
-            <span className='font-semibold text-5xl'>
-              ${prices.ethereum?.usd?.toLocaleString() || 'Loading...'}
+            <span>
+              $
+              {Math.floor(prices.ethereum?.usd || 0).toLocaleString() ||
+                'Loading...'}
             </span>
           </p>
         </div>
@@ -68,20 +78,14 @@ export default function Home() {
           target='_blank'
           rel='noopener noreferrer'
         >
-          <FontAwesomeIcon
-            icon={faGithub}
-            className='w-6 h-6 hover:text-gray-400'
-          />
+          <FontAwesomeIcon icon={faGithub} className='text-5xl fa-github' />
         </a>
         <a
           href='https://linkedin.com/in/v3nd3tti'
           target='_blank'
           rel='noopener noreferrer'
         >
-          <FontAwesomeIcon
-            icon={faLinkedin}
-            className='w-6 h-6 hover:text-gray-400'
-          />
+          <FontAwesomeIcon icon={faLinkedin} className='text-5xl fa-linkedin' />
         </a>
         <a
           href='https://x.com/v3nd3tti'
@@ -90,7 +94,7 @@ export default function Home() {
         >
           <FontAwesomeIcon
             icon={faXTwitter}
-            className='w-6 h-6 hover:text-gray-400'
+            className='text-5xl fa-x-twitter'
           />
         </a>
       </footer>

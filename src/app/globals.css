@@ -7,11 +7,9 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 body {
@@ -26,4 +24,16 @@ body {
 
 #faEthereum {
   color: #3c3c3d;
+}
+
+footer .fa-github,
+footer .fa-linkedin,
+footer .fa-x-twitter {
+  color: #ffffff !important; /* Static white */
+}
+
+footer .fa-github:hover,
+footer .fa-linkedin:hover,
+footer .fa-x-twitter:hover {
+  color: #9ca3af !important; /* Static hover gray */
 }
