@@ -20,6 +20,7 @@ interface CoinPrices {
 export default function Home() {
   const [prices, setPrices] = useState<CoinPrices>({});
   const { theme, toggleTheme } = useTheme();
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
 
   useEffect(() => {
     fetch(
@@ -27,13 +28,22 @@ export default function Home() {
     )
       .then((res) => res.json())
       .then((data: CoinPrices) => setPrices(data))
-      .catch((err) => console.error('Fetch error:', err));
+      .catch((err) => console.error('Fetch Error:', err));
   }, []);
 
+  const togglePanel = () => setIsPanelOpen(!isPanelOpen);
+  const closePanel = () => setIsPanelOpen(false);
+
   return (
-    <div className='flex flex-col min-h-screen'>
+    <div
+      className='flex flex-col min-h-screen relative'
+      onClick={isPanelOpen ? closePanel : undefined}
+    >
       <button
-        onClick={toggleTheme}
+        onClick={(e) => {
+          e.stopPropagation();
+          toggleTheme();
+        }}
         className='absolute top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700'
       >
         <FontAwesomeIcon
@@ -45,13 +55,17 @@ export default function Home() {
         <h1 className='text-4xl font-bold mb-6 text-blue-400'>
           Welcome to KoinLab
         </h1>
-        <p className='text-xl mb-4 text-center'>
+        <p className='text-xl text-center mb-6'>
           Future home of the world's ultimate crypto-currency!!! For now it's
-          API practice. 😊
+          API practice 😊
         </p>
-        <div id='crypto-prices' className='text-5xl space-y-2'>
+        <div id='crypto-prices' className='text-5xl space-y-2 mb-6'>
           <p>
-            <FontAwesomeIcon id='faBitcoin' icon={faBitcoin} className='mr-2' />
+            <FontAwesomeIcon
+              id='faBitcoin'
+              icon={faBitcoin}
+              className='mr-2 text-5xl'
+            />
             Bitcoin:{' '}
             <span>
               ${prices.bitcoin?.usd?.toLocaleString() || 'Loading...'}
@@ -61,7 +75,7 @@ export default function Home() {
             <FontAwesomeIcon
               id='faEthereum'
               icon={faEthereum}
-              className='mr-2'
+              className='mr-2 text-5xl'
             />
             Ethereum:{' '}
             <span>
@@ -71,32 +85,55 @@ export default function Home() {
             </span>
           </p>
         </div>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            togglePanel();
+          }}
+          className='text-lg font-semibold text-blue-400 hover:text-blue-600 dark:hover:text-blue-300'
+        >
+          Socials
+        </button>
       </main>
-      <footer className='flex justify-center gap-6 py-4 bg-gray-800'>
-        <a
-          href='https://github.com/v3nd3tti'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <FontAwesomeIcon icon={faGithub} className='text-5xl fa-github' />
-        </a>
-        <a
-          href='https://linkedin.com/in/v3nd3tti'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <FontAwesomeIcon icon={faLinkedin} className='text-5xl fa-linkedin' />
-        </a>
-        <a
-          href='https://x.com/v3nd3tti'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <FontAwesomeIcon
-            icon={faXTwitter}
-            className='text-5xl fa-x-twitter'
-          />
-        </a>
+      <footer
+        className={`fixed bottom-0 left-0 w-full h-30 bg-gray-800 transform transition-transform duration-300 ${
+          isPanelOpen ? 'translate-y-0' : 'translate-y-full'
+        }`}
+      >
+        <div className='p-4'>
+          <h2 className='text-lg font-semibold text-white mb-4 text-center'>
+            Connect with Me
+          </h2>
+          <div className='flex justify-center gap-6'>
+            <a
+              href='https://github.com/v3nd3tti'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <FontAwesomeIcon icon={faGithub} className='text-5xl fa-github' />
+            </a>
+            <a
+              href='https://linkedin.com/in/v3nd3tti'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <FontAwesomeIcon
+                icon={faLinkedin}
+                className='text-5xl fa-linkedin'
+              />
+            </a>
+            <a
+              href='https://x.com/v3nd3tti'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <FontAwesomeIcon
+                icon={faXTwitter}
+                className='text-5xl fa-x-twitter'
+              />
+            </a>
+          </div>
+        </div>
       </footer>
     </div>
   );
