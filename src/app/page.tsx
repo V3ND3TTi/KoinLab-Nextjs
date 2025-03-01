@@ -56,8 +56,8 @@ export default function Home() {
           Welcome to KoinLab
         </h1>
         <p className='text-xl text-center mb-6'>
-          Future home of the world's ultimate crypto-currency!!! For now it's
-          API practice 😊
+          Future home of the worlds ultimate crypto-currency!!! For now its API
+          practice 😊
         </p>
         <div id='crypto-prices' className='text-5xl space-y-2 mb-6'>
           <p>
