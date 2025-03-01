@@ -59,12 +59,12 @@ export default function Home() {
           Future home of the worlds ultimate crypto-currency!!! For now its API
           practice 😊
         </p>
-        <div id='crypto-prices' className='text-5xl space-y-2 mb-6'>
+        <div id='crypto-prices' className='text-4xl space-y-2 mb-6'>
           <p>
             <FontAwesomeIcon
               id='faBitcoin'
               icon={faBitcoin}
-              className='mr-2 text-5xl'
+              className='mr-2 text-4xl'
             />
             Bitcoin:{' '}
             <span>
@@ -75,7 +75,7 @@ export default function Home() {
             <FontAwesomeIcon
               id='faEthereum'
               icon={faEthereum}
-              className='mr-2 text-5xl'
+              className='mr-2 text-4xl'
             />
             Ethereum:{' '}
             <span>
