@@ -39,7 +39,7 @@ export default function ClientHome({ prices }: ClientHomeProps) {
       <main className='flex-grow flex flex-col items-center justify-center p-4'>
         <h1 className='text-4xl font-bold mb-6 text-blue-400'>Welcome to KoinLab</h1>
         <p className='text-xl text-center mb-6'>
-          Future home of the world's ultimate crypto-currency!!! For now it's API practice 😊
+          Future home of the world's ultimate crypto-currency!!! For now it's API practice 🤓
         </p>
         <div id='crypto-prices' className='text-4xl space-y-2 mb-6'>
           <p>
